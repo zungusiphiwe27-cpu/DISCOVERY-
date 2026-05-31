@@ -920,7 +920,7 @@ box-shadow:0 4px 12px rgba(0,0,0,0.3);backdrop-filter:blur(8px);white-space:nowr
     <a href="#">Business</a><span class="utility-sep">|</span>
     <a href="#">Help &amp; Support</a><span class="utility-sep">|</span>
     <a href="#">0860 000 628</a><span class="utility-sep">|</span>
-    <div class="utility-user"><div class="utility-avatar" id="util-avatar">--</div> <span id="util-name">My Account</span></div>
+    <div class="utility-user"><div class="utility-avatar" id="util-avatar">LS</div> <span id="util-name">Lethabo Sithole</span></div>
     <span class="utility-sep">|</span>
     <a href="#" onclick="doLogout();return false">Sign Out</a>
   </div>
@@ -1206,35 +1206,23 @@ function signupSubmit() {
 // LOGIN
 // ══════════════════════════════════════════════
 function doLogin() {
-  const un  = document.getElementById('login-username').value.trim();
-  const pw  = document.getElementById('login-password').value.trim();
+  const un = document.getElementById('login-username').value.trim();
+  const pw = document.getElementById('login-password').value.trim();
   const err = document.getElementById('login-error');
   err.classList.remove('show');
   if (!un || !pw) { err.textContent = 'Please enter your username and password.'; err.classList.add('show'); return; }
-
   const btn = document.getElementById('login-btn');
   btn.disabled = true; btn.textContent = 'Signing in…';
-
-  // Build display name from username
-  // e.g. "lethabo.sithole" → "Lethabo Sithole"
-  //      "john"            → "John"
-  const displayName = un
-    .replace(/[._-]/g, ' ')
-    .split(' ')
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
-    .join(' ');
-  const initials = displayName.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
-
   setTimeout(() => {
     btn.disabled = false; btn.textContent = 'Sign In Securely';
-    launchApp(displayName, initials);
+    launchApp('Lethabo Sithole', 'LS');
   }, 900);
 }
 
 function doDemoLogin() {
   const btn = document.getElementById('login-btn');
   btn.disabled = true;
-  setTimeout(() => { btn.disabled = false; launchApp('Demo User', 'DU'); }, 600);
+  setTimeout(() => { btn.disabled = false; launchApp('Lethabo Sithole', 'LS'); }, 600);
 }
 
 function doLogout() {
@@ -1247,10 +1235,6 @@ function doLogout() {
 // APP LAUNCH
 // ══════════════════════════════════════════════
 function launchApp(name, initials) {
-  // Update the global account data with the real user's name
-  ACCOUNT_DATA.user.name     = name;
-  ACCOUNT_DATA.user.initials = initials;
-
   document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
   document.getElementById('app').classList.remove('hidden');
   document.getElementById('util-name').textContent = name;
